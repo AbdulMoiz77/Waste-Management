@@ -2,9 +2,6 @@
 #include <WiFi.h>
 #include <esp32cam.h>
  
-const char* WIFI_SSID = "";
-const char* WIFI_PASS = "";
- 
 WebServer server(80);
 
 const int irSensor = 13;
@@ -74,7 +71,7 @@ void  setup(){
   }
   WiFi.persistent(false);
   WiFi.mode(WIFI_STA);
-  WiFi.begin(WIFI_SSID, WIFI_PASS);
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
   }
@@ -93,7 +90,7 @@ void  setup(){
  
 void loop()
 {
-    irReading = digitalRead(irSensor);
+  irReading = digitalRead(irSensor);
   if(irReading == LOW){
     digitalWrite(led, HIGH);
     server.handleClient();
